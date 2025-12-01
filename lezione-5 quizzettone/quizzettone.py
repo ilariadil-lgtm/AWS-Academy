@@ -51,13 +51,14 @@ def valida_scelta(scelta: str) -> bool:
     else:
         return False
     
-def genera_feedback(scelta:str) -> str:
+def genera_feedback(scelta:str, is_risposta_corretta: bool) -> str:
      """Restituisce il messaggio che indica all'utente se ha indovinato o meno. Questa funzione viene eseguita solo se la funzione di validazione restituisce True. """
-     if scelta.upper == "A":
+     if scelta.upper() == "A":
           return "Hai indovinato!"
      else:
           return "Non hai indovinato, peccato ritenta"
-     
+
+is_risposta_corretta = False     
 def mostra_feedback(messaggio: str) -> None:
     """Stampa il messaggio di feedback in modo formattato."""
     simbol: str = "*"*30
@@ -66,18 +67,26 @@ def mostra_feedback(messaggio: str) -> None:
           {messaggio}
           {simbol}
         """)
-
+    
 def main():
-    mostra_domanda()
-    risposta_da_validare: str = raccogli_risposta()
-    risposta_validata: bool= valida_scelta(risposta_da_validare)
-    feedback: str = ""
-    if risposta_validata == True:
-     feedback = genera_feedback(risposta_da_validare)
-    else:
-     feedback = "Inserisci solo le opzioni elencate"
+    is_risposta_corretta = False
 
-    mostra_feedback(feedback)
+    while True:
+        mostra_domanda()
+        risposta_da_validare: str = raccogli_risposta()
+        risposta_validata: bool= valida_scelta(risposta_da_validare)
+        feedback: str = ""
+
+        if risposta_validata == True:
+         feedback = genera_feedback(risposta_da_validare, is_risposta_corretta)
+         if feedback == "Hai indovinato!":
+              is_risposta_corretta = True
+        else:
+         feedback = "Inserisci solo le opzioni elencate"
+
+        mostra_feedback(feedback)
+        if is_risposta_corretta == True:
+            break
 
 # Entry point del programma
 main()
