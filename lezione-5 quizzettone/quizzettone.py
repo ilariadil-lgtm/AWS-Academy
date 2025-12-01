@@ -57,6 +57,13 @@ def genera_feedback(scelta:str, is_risposta_corretta: bool) -> str:
           return "Hai indovinato!"
      else:
           return "Non hai indovinato, peccato ritenta"
+     
+
+def is_risposta_esatta(scelta: str) -> bool:
+    if scelta.upper() == "A":
+        return True
+    else:
+        return False
 
 is_risposta_corretta = False     
 def mostra_feedback(messaggio: str) -> None:
@@ -69,23 +76,21 @@ def mostra_feedback(messaggio: str) -> None:
         """)
     
 def main():
-    is_risposta_corretta = False
-
+    is_risposta_corretta: bool = False
     while True:
         mostra_domanda()
         risposta_da_validare: str = raccogli_risposta()
-        risposta_validata: bool= valida_scelta(risposta_da_validare)
+        risposta_validata: bool = valida_scelta(risposta_da_validare)
         feedback: str = ""
 
         if risposta_validata == True:
-         feedback = genera_feedback(risposta_da_validare, is_risposta_corretta)
-         if feedback == "Hai indovinato!":
-              is_risposta_corretta = True
-        else:
-         feedback = "Inserisci solo le opzioni elencate"
+            is_risposta_corretta = is_risposta_esatta(risposta_da_validare)
+            feedback = genera_feedback(is_risposta_corretta)
+        else: 
+            feedback = "Inserisci solo la risposta tra le opzioni elencate"
 
         mostra_feedback(feedback)
-        if is_risposta_corretta == True:
+        if is_risposta_corretta == True: 
             break
 
 # Entry point del programma
