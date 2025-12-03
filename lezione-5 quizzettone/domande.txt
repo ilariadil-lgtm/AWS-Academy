@@ -1,8 +1,2 @@
- Chi parteciperà a Sanremo 2026?
-          
-          A. Nayt
-          B. La nina
-          C. Nilla Pizzi
-          D. Rocco Papaleo
-
-£A
+domanda-1.txt
+domanda-2.txt

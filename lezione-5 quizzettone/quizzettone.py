@@ -31,7 +31,7 @@ import sys
 def mostra_domanda(domanda: str) -> None:
     """Stampa la domanda e le opzioni di risposta."""
  
-    print( domanda)
+    print(domanda)
     
 def leggi_file(file_path: str) -> str:
     """Legge il contenuto del file e lo restituisce come stringa."""
@@ -93,6 +93,35 @@ def mostra_feedback(messaggio: str) -> None:
 """)
     
 def main():
+
+    domande_list: list[str] = []
+    qa: dict[str, str] = {
+        "domanda": None,
+        "risposta": None
+    }
+
+    with open("domande.txt", "r") as f:
+        for i in f:
+            domande_list.append(i.strip())
+
+    content: str = leggi_file(f"domande_risposte/{domande_list[0]}")
+    index: int = estrai_index(content)
+    qa["domanda"] = estrai_domanda(content, index)
+    qa["risposta"] = estrai_risposta(content, index)
+
+    print(qa)
+   
+    """
+    with open(domande_list[0], "r") as f:
+        for i in f:
+            print(i)
+    print(domande_list)
+       
+            #print(i.strip()) #strip toglie gli spazi bianchi iniziali e finali
+    """
+   
+   
+    """
     file_path: str = sys.argv[1]
     content: str = leggi_file(file_path)
     index: int = estrai_index(content)
@@ -115,6 +144,6 @@ def main():
         mostra_feedback(feedback)
         if is_risposta_corretta == True: 
             break
-
+        """
 # Entry point del programma
 main()
