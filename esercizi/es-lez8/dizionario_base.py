@@ -1,4 +1,6 @@
-config: dict[str, str ] = {
+from typing import Union
+
+config: dict[str, Union[str, int, bool]] = {
 
     "host": "192.168.1.1",
     "port": 8080,
