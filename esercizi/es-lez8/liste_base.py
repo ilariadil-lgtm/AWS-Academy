@@ -6,7 +6,7 @@ server.insert(0,"proxy01")
 server.remove("cache01")
 
 print(server)
-print(lunghezza := len(server))
+print(len(server))
 
 #esercizio corretto
 
